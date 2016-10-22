@@ -1,0 +1,4 @@
+---
+# defaults file for go-ubuntu
+go_use_ppa: no
+go_upgrade: no

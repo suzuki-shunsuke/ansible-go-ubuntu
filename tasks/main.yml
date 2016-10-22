@@ -1,0 +1,21 @@
+---
+# tasks file for go-ubuntu
+- block:
+  - name: Install software-properties-common
+    apt: 
+      name: software-properties-common
+      update_cache: yes
+      install_recommends: no
+    become: "{{go_nonroot}}"
+  - name: Add APT repositories(ppa:ubuntu-lxc/lxd-stable)
+    apt_repository:
+      repo: ppa:ubuntu-lxc/lxd-stable
+    become: "{{go_nonroot}}"
+  when: go_use_ppa
+- name: Install go
+  apt: 
+    name: golang
+    update_cache: yes
+    install_recommends: no
+    state: "{{go_upgrade | ternary('latest', 'present')}}"
+  become: "{{go_nonroot}}"

@@ -1,0 +1,41 @@
+---
+- hosts: default
+  roles:
+  - ansible-go-ubuntu
+  tasks:
+  - command: go version
+    register: result
+    changed_when: false
+  - debug:
+      var: result
+- hosts: default
+  roles:
+  - role: ansible-go-ubuntu
+    go_upgrade: yes
+  tasks:
+  - command: go version
+    register: result
+    changed_when: false
+  - debug:
+      var: result
+- hosts: default
+  roles:
+  - role: ansible-go-ubuntu
+    go_use_ppa: yes
+  tasks:
+  - command: go version
+    register: result
+    changed_when: false
+  - debug:
+      var: result
+- hosts: default
+  roles:
+  - role: ansible-go-ubuntu
+    go_upgrade: yes
+    go_use_ppa: yes
+  tasks:
+  - command: go version
+    register: result
+    changed_when: false
+  - debug:
+      var: result
